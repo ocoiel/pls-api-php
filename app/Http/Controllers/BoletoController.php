@@ -28,7 +28,7 @@ class BoletoController extends Controller
         $users = $database->getReference('usuarios');
         $snapshot = $users->getSnapshot();
         $value = $snapshot->getValue();
-        // dd($value);
+        dd($value);
         // var_dump($value);
 
         $pagador = new Pessoa([
