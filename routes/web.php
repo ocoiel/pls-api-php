@@ -21,5 +21,5 @@ Route::get('/php', function () {
     return view('info');
 });
 
-Route::get('/boleto', 'BoletoController@index');
+
 

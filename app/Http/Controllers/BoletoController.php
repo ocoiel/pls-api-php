@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Carbon\Carbon;
+use Kreait\Firebase\Database;
 use Illuminate\Http\Request;
 use Eduardokum\LaravelBoleto\Pessoa as Pessoa;
 use Eduardokum\LaravelBoleto\Boleto\Banco\Bancoob as Bancoob;
@@ -10,20 +11,27 @@ use Eduardokum\LaravelBoleto\Cnab\Remessa\Cnab240\Banco\Bancoob as BancoobRemesa
 
 class BoletoController extends Controller
 {
-    public function index ()
+    public function store()
     {
         $beneficiario = new Pessoa([
             'documento' => '00.000.000/0000-00',
-            'nome'      => 'Company co.',
+            'nome'      => 'CYB Soluções',
             'cep'       => '00000-000',
-            'endereco'  => 'Street name, 123',
-            'bairro'    => 'district',
-            'uf'        => 'UF',
-            'cidade'    => 'City',
+            'endereco'  => 'Praça Tiradentes, 2802',
+            'bairro'    => 'Centro',
+            'uf'        => 'Rio de Janeiro',
+            'cidade'    => 'Rio de Janeiro',
         ]);
 
-        $pagador = new Pessoa(
-            [
+        $database = app('firebase.database');
+
+        $users = $database->getReference('usuarios');
+        $snapshot = $users->getSnapshot();
+        $value = $snapshot->getValue();
+        // dd($value);
+        // var_dump($value);
+
+        $pagador = new Pessoa([
                 'nome'      => 'Cliente',
                 'endereco'  => 'Rua um, 123',
                 'bairro'    => 'Bairro',
@@ -37,7 +45,7 @@ class BoletoController extends Controller
         $dataVencimento = new Carbon();
         $bancoob = new Bancoob([
             'logo' => __DIR__ . DIRECTORY_SEPARATOR . 'arquivos' . DIRECTORY_SEPARATOR . 'logo1.png',
-            'dataVencimento' => $dataVencimento,
+            'dataVencimento'         => $dataVencimento,
             'dataVencimento'         => new \Carbon\Carbon(),
             'valor'                  => 100,
             'multa'                  => false,

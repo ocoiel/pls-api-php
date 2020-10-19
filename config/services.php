@@ -14,6 +14,15 @@ return [
     |
     */
 
+    'firebase' => [
+        'api_key' => env('FIREBASE_API_KEY'),
+        'auth_domain' => env('FIREBASE_AUTH_URI'),
+        'database_url' => env('FIREBASE_DATABASE_URL'),
+        // 'secret' => env(''),        "kreait/laravel-firebase": "^2.2",
+
+        'storage_bucket' => env('FIREBASE_STORAGE_DEFAULT_BUCKET'),
+    ],
+
     'mailgun' => [
         'domain' => env('MAILGUN_DOMAIN'),
         'secret' => env('MAILGUN_SECRET'),
