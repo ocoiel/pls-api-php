@@ -1,3 +1,1 @@
-Exemplo Boleto Laravel
-
-Dados Fixos
+tomara q funcione meu deus......
