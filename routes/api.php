@@ -18,6 +18,8 @@ use Illuminate\Support\Facades\Route;
 //     return $request->user();
 // });
 
-Route::get('/boleto', 'BoletoController@store');
+//Boletos
+Route::get('/boleto', 'BoletoController@index');
 
+//Users
 Route::apiResource('user', 'UserController');

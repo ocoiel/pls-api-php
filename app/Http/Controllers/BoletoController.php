@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Carbon\Carbon;
+use Kreait\Firebase\ServiceAccount;
 use Kreait\Firebase\Database;
 use Illuminate\Http\Request;
 use Eduardokum\LaravelBoleto\Pessoa as Pessoa;
@@ -11,7 +12,12 @@ use Eduardokum\LaravelBoleto\Cnab\Remessa\Cnab240\Banco\Bancoob as BancoobRemesa
 
 class BoletoController extends Controller
 {
-    public function store()
+    public function __construct(Database $database)
+    {
+        $this->users = $database->getReference('users');
+    }
+
+    public function index()
     {
         $beneficiario = new Pessoa([
             'documento' => '00.000.000/0000-00',
@@ -23,13 +29,8 @@ class BoletoController extends Controller
             'cidade'    => 'Rio de Janeiro',
         ]);
 
-        $database = app('firebase.database');
-
-        $users = $database->getReference('usuarios');
-        $snapshot = $users->getSnapshot();
-        $value = $snapshot->getValue();
-        dd($value);
-        // var_dump($value);
+        $value = $this->users->getValue();
+        // dd($value);
 
         $pagador = new Pessoa([
                 'nome'      => 'Cliente',
@@ -58,7 +59,7 @@ class BoletoController extends Controller
             'agencia'                => 1111,
             'convenio'               => 123123,
             'conta'                  => 22222,
-            'descricaoDemonstrativo' => ['demonstrativo 1', 'demonstrativo 2', 'demonstrativo 3'],
+            'descricaoDemonstrativo' => [''],
             'instrucoes'             => ['instrucao 1', 'instrucao 2', 'instrucao 3'],
             'aceite'                 => 'S',
             'especieDoc'             => 'DM',
@@ -82,6 +83,5 @@ class BoletoController extends Controller
 
         $remessa->addBoleto($bancoob);
         echo $remessa->save(__DIR__ . DIRECTORY_SEPARATOR . 'arquivos' . DIRECTORY_SEPARATOR . 'bancoob.txt');
-
     }
 }

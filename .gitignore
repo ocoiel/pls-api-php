@@ -11,3 +11,5 @@ Homestead.yaml
 npm-debug.log
 yarn-error.log
 cyb-firebase-credentials.json
+cyb-firebase-credentials-*.json
+cyb*.json
