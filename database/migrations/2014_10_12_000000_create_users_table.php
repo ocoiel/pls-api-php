@@ -15,6 +15,7 @@ class CreateUsersTable extends Migration
     {
         Schema::create('users', function (Blueprint $table) {
             $table->id();
+            $table->string('firebaseUID')->unique();
             $table->string('nome');
             $table->string('cpf')->unique();
             $table->string('endereco');
@@ -25,6 +26,7 @@ class CreateUsersTable extends Migration
             $table->integer('idade');
             $table->string('url_imagem');
             $table->string('email')->unique();
+            $table->string('firebaseToken')->unique();
             $table->timestamp('email_verified_at')->nullable();
             $table->string('password');
             $table->rememberToken();
