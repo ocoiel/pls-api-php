@@ -81,7 +81,25 @@ class UserController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $updateData = [
+            'title' => $request->title,
+            'body'  => $request->body,
+        ];
+
+        $updates    = [
+            $id => $updateData,
+        ];
+
+        $updatePost = $this->tabel_posts->update($updates);
+
+        $message    = [
+            'status'  => '203',
+            'message' => 'Atualizado com sucesso!',
+            'id'      => $id,
+            'data'    => $updateData,
+        ];
+
+        return $message;
     }
 
     /**
@@ -92,6 +110,15 @@ class UserController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $this->tabel_posts
+            ->getChild($id)
+            ->remove();
+
+        $message = [
+            'status' => '204',
+            'message' => 'Id: ' . $id . ' removido com sucesso!',
+        ];
+
+        return $message;
     }
 }

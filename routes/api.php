@@ -18,6 +18,10 @@ use Illuminate\Support\Facades\Route;
 //     return $request->user();
 // });
 
+//Auth
+Route::post('/login', 'AuthController@login');
+Route::post('/register', 'AuthController@register');
+
 //Boletos
 Route::get('/boleto', 'BoletoController@index');
 
