@@ -21,19 +21,38 @@ class AuthController extends Controller
     public function register(Request $request)
     {
         $request->validate([
-            'name' => 'required',
+            'nome' => 'required',
+            'cpf'  => 'required',
+            'cep'  => 'required',
             'email' => 'required|email',
-            'password' => 'required|min:6'
+            'password' => 'required|min:6',
         ]);
 
+        $auth = $this->auth;
+        // dd($uid);
+        $createToken = $auth->createCustomToken('tokentest');
+        dd($createToken->payload[0]);
 
-        $user = User::create([
-            'name' => $request->name,
+        $user = $this->users->push([
+            'nome' => $request->nome,
+            'cpf'  => $request->cpf,
+            'cep'  => $request->cep,
             'email' => $request->email,
             'password' => bcrypt($request->password),
+            'firebaseToken' => $createToken
         ]);
 
-        return response()->json($user, 201);
+        // dd($user);
+
+        $message = [
+            'status'  => '201',
+            'message' => 'Usuário criado com sucesso!',
+            'id'      => $user->getKey(),
+            'data'    => $user->getValue(),
+            'firebaseToken' => $createToken
+        ];
+
+        return $message;
     }
 
     public function login(Request $request)
