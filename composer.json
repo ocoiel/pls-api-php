@@ -10,6 +10,7 @@
     "require": {
         "php": "^7.2.5",
         "ext-intl": "*",
+        "canducci/zipcode": "^3.0",
         "eduardokum/laravel-boleto": "^0.8.9",
         "fideloper/proxy": "^4.2",
         "fruitcake/laravel-cors": "^1.0",

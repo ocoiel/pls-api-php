@@ -31,7 +31,6 @@ class AuthController extends Controller
         $auth = $this->auth;
         // dd($uid);
         $createToken = $auth->createCustomToken('tokentest');
-        dd($createToken->payload[0]);
 
         $user = $this->users->push([
             'nome' => $request->nome,

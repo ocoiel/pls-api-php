@@ -164,8 +164,12 @@ return [
 
         /*
          * Package Service Providers...
+         *
          */
         //
+        Canducci\ZipCode\Providers\ZipCodeServiceProvider::class,
+        Canducci\ZipCode\Providers\ZipCodeAddressServiceProvider::class,
+        Kreait\Laravel\Firebase\ServiceProvider::class,
 
         /*
          * Application Service Providers...
@@ -175,7 +179,7 @@ return [
         App\Providers\BroadcastServiceProvider::class,
         App\Providers\EventServiceProvider::class,
         App\Providers\RouteServiceProvider::class,
-        Kreait\Laravel\Firebase\ServiceProvider::class,
+
 
     ],
 
@@ -228,7 +232,8 @@ return [
         'URL' => Illuminate\Support\Facades\URL::class,
         'Validator' => Illuminate\Support\Facades\Validator::class,
         'View' => Illuminate\Support\Facades\View::class,
-
+        'ZipCode'   => Canducci\ZipCode\Facades\ZipCode::class,
+        'Address'   => Canducci\ZipCode\Facades\ZipCodeAddress::class,
     ],
 
 ];

@@ -25,5 +25,8 @@ Route::post('/register', 'AuthController@register');
 //Boletos
 Route::get('/boleto', 'BoletoController@index');
 
+//CEP
+Route::get('/cep/{cep}', 'CepController@show');
+
 //Users
 Route::apiResource('user', 'UserController');
